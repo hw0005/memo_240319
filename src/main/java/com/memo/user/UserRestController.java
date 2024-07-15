@@ -1,4 +1,4 @@
-package com.memo.user;
+	package com.memo.user;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.memo.common.EncryptUtils;
 import com.memo.user.bo.UserBO;
 import com.memo.user.entity.UserEntity;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/user")
@@ -45,7 +48,12 @@ public class UserRestController {
 	}
 	
 	/**
-	 * 아이디 중복확인 API
+	 * 회원가입 API
+	 * @param loginId
+	 * @param password
+	 * @param name
+	 * @param email
+	 * @return
 	 */
 	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
@@ -72,6 +80,45 @@ public class UserRestController {
 		}
 		return result;
 	}
+	
+	/**
+	 * 로그인 API
+	 * @param loginId
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/sign-in")
+	public Map<String, Object> signIn(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("password") String password,
+			HttpServletRequest request) {
+		
+		// password 해싱
+		String hashedPassword = EncryptUtils.md5(password);
+		
+		// db select - loginId, 해싱된 비밀번호 => UserEntity(채워져 있거나 null)
+		UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, hashedPassword);
+		
+		// 로그인 처리 및 응답값
+		Map<String, Object> result = new HashMap<>();
+		if (user != null) { // 성공
+			// 세션에 사용자 정보를 담는다.(사용자 각각 마다)
+			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userName", user.getName());
+			
+			result.put("code", 200);
+			result.put("result", "성공");
+		} else { // 실패
+			result.put("code", 403);
+			result.put("error_message", "존재하지 않는 사용자입니다.");
+		}
+		return result;
+	}
+	
+	
 	
 	
 	

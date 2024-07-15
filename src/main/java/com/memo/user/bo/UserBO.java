@@ -30,6 +30,12 @@ public class UserBO {
 				.build());
 	}
 	
+	// input: loginId, password(해싱된 패스워드 아니어도 알 바 아님~)
+	// output: UserEntity or null
+	public UserEntity getUserEntityByLoginIdPassword(String loginId, String password) {
+		return userRepository.findByLoginIdAndPassword(loginId, password);
+	}
+	
 	
 	
 }

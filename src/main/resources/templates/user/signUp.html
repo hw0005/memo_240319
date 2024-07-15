@@ -138,7 +138,7 @@
 				//$(this)[0].submit(); // this = form태그 자체, 화면 이동
 				
 				// 2) AJAX 호출 => response가 JSON
-				let url = $(this).attr("action"); // 폼태그에 있는 action url 가져오기
+				let url = $(this).attr('action'); // 폼태그에 있는 action url 가져오기
 				console.log(url);
 				let params = $(this).serialize(); // 폼태그에 있는 name 속성과 value를 파라미터로 구성
 				console.log(params);
@@ -149,7 +149,7 @@
 					if (data.code == 200) {
 						alert("가입을 환영합니다. 로그인 해주세요");
 						// 로그인 화면 이동
-						location.href="/user/sign-in-view"
+						location.href="/user/sign-in-view";
 					} else {
 						alert(data.error_message);
 					}
