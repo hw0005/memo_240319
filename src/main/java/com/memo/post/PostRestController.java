@@ -8,9 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.memo.post.bo.PostBO;
 import com.memo.post.domain.Post;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @RestController
@@ -20,20 +23,23 @@ public class PostRestController {
 	
 	// 글 쓴 후 저장 하는 API
 	@PostMapping("/create")
-	public Map<String, Object> postCreate(
+	public Map<String, Object> create(
 			@RequestParam("subject") String subject,
-			@RequestParam(value = "content", required = false) String content,
-			@RequestParam(value = "file", required = false) String file) {
+			@RequestParam("content") String content,
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			HttpSession session) {
+		
+		// 글쓴이 번호를 session에서 꺼낸다. => 로그인이 되지 않았을 시 일부러 에러가 나게 한다.
+		int userId = (int)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
 		
 		// DB insert
-		Post post = postBO.addPost(subject, content, file);
+		postBO.addPost(userId, userLoginId, subject, content, file);
 		
 		// 응답값
 		Map<String, Object> result = new HashMap<>();
 		result.put("code", 200);
 		result.put("result", "성공");
-		
-		
 		
 		return result;
 	}

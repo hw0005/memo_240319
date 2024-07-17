@@ -29,17 +29,19 @@
  	<insert id="insertPost" parameterType="map">
  		Insert INTO `post`
  		(
- 			`subject`
+ 			`userId`
+ 			, `subject`
 			, `content`
 			, `imagePath`
 			, `createdAt`
 			, `updatedAt`
  		)
  		VALUES
- 		(
- 			#{subject}
- 			,#{content}
- 			,#{imagePath}
+ 		(	
+ 			#{userId}
+ 			, #{subject}
+ 			, #{content}
+ 			, #{imagePath}
  			, NOW()
  			, NOW()
  		)
