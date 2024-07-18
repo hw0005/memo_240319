@@ -32,7 +32,6 @@ public class PostRestController {
 		// 글쓴이 번호를 session에서 꺼낸다. => 로그인이 되지 않았을 시 일부러 에러가 나게 한다.
 		int userId = (int)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
-		
 		// DB insert
 		postBO.addPost(userId, userLoginId, subject, content, file);
 		
