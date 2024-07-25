@@ -53,7 +53,8 @@ public class PostController {
 	@GetMapping("/post-detail-view")
 	public String postDetailView(
 			@RequestParam("postId") int postId,
-			Model model, HttpSession session) {
+			Model model, 
+			HttpSession session) {
 		
 		//db 조회 -userId, postId
 		int userId = (int)session.getAttribute("userId");
