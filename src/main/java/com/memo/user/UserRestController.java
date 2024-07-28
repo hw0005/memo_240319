@@ -1,4 +1,4 @@
-	package com.memo.user;
+package com.memo.user;
 
 import java.util.HashMap;
 import java.util.Map;
