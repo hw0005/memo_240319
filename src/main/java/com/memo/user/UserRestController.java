@@ -34,6 +34,8 @@ public class UserRestController {
 		
 		// 로그인 이슈
 		
+		// 로그인 이슈 1
+		
 		// db 조회(null이거나 채워져있거나)
 		UserEntity user = userBO.getUserEntityByLoginId(loginId);
 		
