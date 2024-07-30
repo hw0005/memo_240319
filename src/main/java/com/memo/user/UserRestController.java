@@ -32,9 +32,7 @@ public class UserRestController {
 	public Map<String, Object> isDuplicatedId(
 			@RequestParam("loginId") String loginId) {
 		
-		// 로그인 이슈
-		
-		// 로그인 이슈 1
+		// 로그인 이슈 1111
 		
 		// db 조회(null이거나 채워져있거나)
 		UserEntity user = userBO.getUserEntityByLoginId(loginId);
