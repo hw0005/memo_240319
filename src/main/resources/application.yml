@@ -1,4 +1,4 @@
-uiuseserver:
+server:
   port: 80
 spring:
   thymeleaf:
