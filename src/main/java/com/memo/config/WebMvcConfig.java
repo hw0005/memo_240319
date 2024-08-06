@@ -1,3 +1,4 @@
+
 package com.memo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import com.memo.interceptor.PermissionInterceptor;
 
 @Configuration // 설정을 위한 Spring bean
 public class WebMvcConfig implements WebMvcConfigurer {
-	
+
 	@Autowired
 	private PermissionInterceptor interceptor;
 	
@@ -21,7 +22,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		registry
 		.addInterceptor(interceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/error", "/css/**", "/img/**, /user/sign-out");
+		.excludePathPatterns("/error", "/css/**", "/img/**", "/user/sign-out");
 	}
 	
 	// 이미지 path와 서버에 업로드 된 실제 이미지와 매핑 설정
@@ -30,10 +31,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 			ResourceHandlerRegistry registry) {
 		
 		registry
-		.addResourceHandler("/images/**") // web path    http://localhost/images/aaaa_1721209520156/rainwater-7858773_640.jpg
+		.addResourceHandler("/images/**") // web path    http://localhost/images/aaaa_1721209532586/flower-8557060_640.jpg
 		.addResourceLocations("file:///" + FileManagerService.FILE_UPLOAD_PATH); // 실제 이미지 파일 위치
 	}
-	
-	
-	
 }
