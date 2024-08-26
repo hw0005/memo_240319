@@ -32,6 +32,19 @@ public class 람다테스트 {
 		
 		log.info("$$$ {}", fruits);
 		
-		
 	}
+	
+	@Test
+	void 메소드레퍼런스() {
+		List<String> fruits = List.of("apple", "banana", "cherry");
+		
+		fruits = fruits
+		.stream()
+		.map(String::toUpperCase) // element -> element.toUpperCase
+		.collect(Collectors.toList());
+		
+		log.info("%%% {}", fruits);
+	}
+	
+	
 }
