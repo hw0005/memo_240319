@@ -10,10 +10,11 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@ToString
+@AllArgsConstructor
 public class 메소드레퍼런스 {
 	
-	@ToString
-	@AllArgsConstructor
+	
 	public class Person() {
 		private String name;
 		private int age;
